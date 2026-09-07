@@ -237,7 +237,7 @@ with st.sidebar:
         source_key = f"example:{choice}"
         with open(os.path.join(SPECTRA_DIR, choice), "rb") as f:
             file_bytes = f.read()
-        default_z = EXAMPLE_SPECTRA[choice]
+        default_z = EXAMPLE_SPECTRA[choice]["zqso"]
         spec_name = choice
 
     zqso = st.number_input("QSO redshift", value=float(default_z), format="%.4f", step=0.001)
