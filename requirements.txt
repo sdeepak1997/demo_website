@@ -4,3 +4,4 @@ scipy
 astropy
 matplotlib
 linetools
+setuptools<80
