@@ -36,7 +36,7 @@ SPECTRA_DIR = os.path.join(HERE, "spectra")
 
 # Bundled example spectra: filename -> z_
 EXAMPLE_SPECTRA = {
-    "J075547.83+220450.1.fits": 2.3248,
+    "J075547.83+220450.1.fits": {"zqso": 2.3248, "absorbers": []},
 }
 
 LAM = np.arange(300, 1250, 0.01)
@@ -274,7 +274,14 @@ with st.sidebar:
         except Exception as e:
             log(f"Error loading results file: {e}")
 
-
+# When the spectrum changes (or on first load), reset the model and seed default absorbers
+if st.session_state.get("current_spec") != spec_name:
+    st.session_state.current_spec = spec_name
+    st.session_state.model = None
+    st.session_state.absorbers = [
+        {"z": float(z), "nhi": float(n)}
+        for z, n in EXAMPLE_SPECTRA.get(spec_name, {}).get("absorbers", [])
+    ]
 # ----------------------------------------------------------------------
 # LOAD DATA
 # ----------------------------------------------------------------------
@@ -322,7 +329,8 @@ with right:
 # ----------------------------------------------------------------------
 # COMPUTE MODEL
 # ----------------------------------------------------------------------
-if run:
+
+if run or st.session_state.model is None:
     try:
         continuum = model_continuum_spectrum([norm, tilt], zqso, telfer_flux_rest, telfer_wave)
         cont_hires = interp(hires_wave, telfer_wave, continuum)
@@ -352,10 +360,7 @@ if run:
     except Exception as e:
         log(f"Error updating model: {e}")
 
-# Invalidate a cached model if the spectrum changed underneath it
 m = st.session_state.model
-if m is not None and m["spec_name"] != spec_name:
-    m = st.session_state.model = None
 
 # ----------------------------------------------------------------------
 # PLOT
