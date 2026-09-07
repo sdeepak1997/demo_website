@@ -202,7 +202,7 @@ if "absorbers" not in st.session_state:
 if "model" not in st.session_state:
     st.session_state.model = None
 if "log" not in st.session_state:
-    st.session_state.log = ["Welcome to the QSO Absorption Line Fitter."]
+    st.session_state.log = ["Welcome to the Lyman Limit Model Fitter."]
 
 
 def log(msg):
@@ -286,7 +286,7 @@ t_rest = load_lyman_template()
 # ----------------------------------------------------------------------
 # MAIN — absorbers
 # ----------------------------------------------------------------------
-st.title("QSO Absorption Line Fitter")
+st.title("Modeling Lyman Limit Systems")
 st.caption(f"{spec_name} — z_QSO = {zqso:.4f}")
 
 left, right = st.columns([3, 1])
