@@ -243,17 +243,17 @@ with st.sidebar:
     zqso = st.number_input("QSO redshift", value=float(default_z), format="%.4f", step=0.001)
 
     st.header("Continuum")
-    norm = st.number_input("Normalization", value=1.0, format="%.4f", step=0.01, key="norm")
+    norm = st.number_input("Normalization", value=20.0, format="%.4f", step=0.01, key="norm")
     tilt = st.number_input("Tilt", value=0.0, format="%.4f", step=0.01, key="tilt")
     bval = st.number_input("b-parameter (km/s)", value=25.0, format="%.1f", step=1.0, key="bval")
 
     st.header("Plot limits")
     st.caption("Leave blank for auto.")
     c1, c2 = st.columns(2)
-    x_min = c1.text_input("X min", "")
-    x_max = c2.text_input("X max", "")
-    y_min = c1.text_input("Y min", "")
-    y_max = c2.text_input("Y max", "")
+    x_min = c1.text_input("X min", "1800")
+    x_max = c2.text_input("X max", "5500")
+    y_min = c1.text_input("Y min", "0")
+    y_max = c2.text_input("Y max", "150")
 
     st.header("Load fit results")
     results_file = st.file_uploader("fit_results.txt", type=["txt"], key="results")
