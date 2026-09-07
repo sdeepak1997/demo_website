@@ -34,7 +34,7 @@ from scipy.interpolate import interp1d
 HERE = os.path.dirname(os.path.abspath(__file__))
 SPECTRA_DIR = os.path.join(HERE, "spectra")
 
-# Bundled example spectra: filename -> z_QSO
+# Bundled example spectra: filename -> z_
 EXAMPLE_SPECTRA = {
     "J075547.83+220450.1.fits": 2.3248,
 }
@@ -42,7 +42,7 @@ EXAMPLE_SPECTRA = {
 LAM = np.arange(300, 1250, 0.01)
 LAM_LL = np.arange(300, 911.76, 0.01)
 
-st.set_page_config(page_title="QSO Absorption Line Fitter", layout="wide")
+st.set_page_config(page_title="Modeling Lyman Limit Systems", layout="wide")
 
 
 # ----------------------------------------------------------------------
